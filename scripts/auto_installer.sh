@@ -20,7 +20,7 @@ if [ `uname -m` == 'x86_64' ]; then
   MACHINE_TYPE=64
 fi
 
-# We need to go into a fresh working directory.
+# We need to go into a fresh working directory. 
 if [ -d $WORKINGDIR ]
 then
 	cd $WORKINGDIR
@@ -37,11 +37,6 @@ if [ $files == 1 ]; then
 	ADDTOPATH=:`pwd`/`ls -d jdk*`
 	PATH=$PATH$ADDTOPATH
 fi
-
-
-
-
-
 
 function DownloadJava {
 	# Check for Java installed
@@ -69,7 +64,7 @@ function DownloadJava {
 		else
 			wget -O $JAVADLNAME --no-cookies --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F" $JAVADL64
 		fi
-
+		
 		tar xvfz $JAVADLNAME
 	else
 		echo "Got SDK"
@@ -103,11 +98,36 @@ function DownloadSamples {
 
 	wget http://dl.dropbox.com/u/4654434/roila.config.xml
 
+	# Escape the file properly. see http://stackoverflow.com/questions/471183/linux-command-line-global-search-and-replace
 	LMFILE=`echo $LMFILE | sed -e 's/[\/&]/\\\\&/g'`
 	SIXDFILE=`echo $SIXDFILE | sed -e 's/[\/&]/\\\\&/g'`
 
 	eval sed -i \'s/D:\\\\java\\\\LEGO_TEST_PC\\\\src\\\\9127.lm/$LMFILE/g\' roila.config.xml
 	eval sed -i \'s/D:\\\\java\\\\LEGO_TEST_PC\\\\src\\\\newdict2.6d/$SIXDFILE/g\' roila.config.xml
+}
+
+function InstallVoice {
+	INSTALL_LOCATION=/usr/share/festival/voices/english
+	echo "Please enter an install location, or press enter to use the default (recommended) (default: $ISNTALL_LOCATION):"
+	read NEW_INSTALL_LOCATION
+
+	#if [ $NEW_INSTALL_LOCATION != "" ]; then
+	#	INSTALL_LOCATION=$NEW_INSTALL_LOCATION
+	#fi
+
+	# ensure that the directory exists
+	# http://stackoverflow.com/questions/59838/how-to-check-if-a-directory-exists-in-a-shell-script
+	if [ -d "$INSTALL_LOCATION" ]; then
+		# http://stackoverflow.com/questions/5207974/writing-a-bash-script-that-performs-operations-that-require-root-permissions
+		wget https://github.com/joshhendo/RoilaLib/blob/master/files/voice/roila_diphone.tar.gz
+		CURRENT_PATH=`pwd`/rolia_diphone
+		echo $CURRENT_PATH
+		tar -zxvf roila_diphone.tar.gz
+		
+		sudo cp $CURRENT_PATH $INSTALL_LOCATION
+	else
+		echo "$INSTALL_LOCATION doesn't exist. Can't install voice until this location exists. Please ensure Festival is installed."
+	fi
 }
 
 #wget -O BTsend.class http://roila.org/wp-content/uploads/2010/04/roila_java.txt
@@ -119,7 +139,6 @@ function DownloadSamples {
 #sed -i -e 'D:\java\LEGO_TEST_PC\src\9127.lm' -e '$LMFILE' roila.config.xml
 #sed -i -e 'D:\java\LEGO_TEST_PC\src\newdict2.6d' -e '$SIXDFILE' roila.config.xml
 
-# Escape the file properly. see http://stackoverflow.com/questions/471183/linux-command-line-global-search-and-replace
 
 
 # Print a menu
@@ -134,6 +153,11 @@ fi
 if [ $MENUOPTION == "2" ]; then
 	echo "You selected option 2!"
 	DownloadSamples
+fi
+
+if [ $MENUOPTION == "3" ]; then
+	echo "You have chosen to install the voice into Festival."
+	InstallVoice
 fi
 
 exit 0
