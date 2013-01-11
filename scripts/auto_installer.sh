@@ -106,6 +106,10 @@ function DownloadSamples {
 	eval sed -i \'s/D:\\\\java\\\\LEGO_TEST_PC\\\\src\\\\newdict2.6d/$SIXDFILE/g\' roila.config.xml
 }
 
+function DownloadJavaLib {
+	wget -O RoilaLib.jar https://github.com/joshhendo/RoilaLib/blob/master/compiled/RoilaLib.jar?raw=true
+}
+
 function InstallVoice {
 	INSTALL_LOCATION=/usr/share/festival/voices/english
 	echo "Please enter an install location, or press enter to use the default (recommended) (default: $ISNTALL_LOCATION):"
@@ -132,30 +136,28 @@ function InstallVoice {
 
 #wget -O BTsend.class http://roila.org/wp-content/uploads/2010/04/roila_java.txt
 
-# Replace paths in roila.config.xml with the appropriate paths.
-# D:\java\LEGO_TEST_PC\src\9127.lm with $LMFILE
-# D:\java\LEGO_TEST_PC\src\newdict2.6d with $6DFILE
-
-#sed -i -e 'D:\java\LEGO_TEST_PC\src\9127.lm' -e '$LMFILE' roila.config.xml
-#sed -i -e 'D:\java\LEGO_TEST_PC\src\newdict2.6d' -e '$SIXDFILE' roila.config.xml
-
 
 
 # Print a menu
-echo -e "Please select an option:\\n\\t1: Download pre-compiled Java Library with Sample Config\\n\\t2: Download Java Sources with Samples"
+echo -e "Please select an option:\\n\\t1: Download pre-compiled Java Library with Sample Config (recommended)\\n\\t2: Download Java Sources with Samples"
 read MENUOPTION
 
 if [ $MENUOPTION == "1" ]; then
-	echo "You selected option 1!"
+	echo "Downloading pre-compiled Java Library w/ Sample Config"
 	DownloadSamples
+	DownloadJavaLib
 fi
 
 if [ $MENUOPTION == "2" ]; then
-	echo "You selected option 2!"
+	echo "Downloading Java Sources w/ Samples."
 	DownloadSamples
 fi
 
-if [ $MENUOPTION == "3" ]; then
+echo -e "\\n\\nDo you want to install the ROILA voice to Festival? (Y/N)"
+read VOICE_INSTALL
+RESULT=$(echo ${VOICE_INSTALL:0:1} | tr [:upper:] [:lower:])
+
+if [ $RESULT == "y" ]; then
 	echo "You have chosen to install the voice into Festival."
 	InstallVoice
 fi
