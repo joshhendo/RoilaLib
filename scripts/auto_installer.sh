@@ -119,12 +119,12 @@ function InstallVoice {
 	# http://stackoverflow.com/questions/59838/how-to-check-if-a-directory-exists-in-a-shell-script
 	if [ -d "$INSTALL_LOCATION" ]; then
 		# http://stackoverflow.com/questions/5207974/writing-a-bash-script-that-performs-operations-that-require-root-permissions
-		wget https://github.com/joshhendo/RoilaLib/blob/master/files/voice/roila_diphone.tar.gz
-		CURRENT_PATH=`pwd`/rolia_diphone
+		wget -O roila_diphone.tar.gz https://github.com/joshhendo/RoilaLib/blob/master/files/voice/roila_diphone.tar.gz?raw=true
+		CURRENT_PATH=`pwd`/roila_diphone
 		echo $CURRENT_PATH
 		tar -zxvf roila_diphone.tar.gz
 		
-		sudo cp $CURRENT_PATH $INSTALL_LOCATION
+		sudo cp -R $CURRENT_PATH $INSTALL_LOCATION
 	else
 		echo "$INSTALL_LOCATION doesn't exist. Can't install voice until this location exists. Please ensure Festival is installed."
 	fi
