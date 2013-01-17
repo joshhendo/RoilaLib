@@ -71,12 +71,8 @@ function DownloadJava {
 	fi
 }
 
-# Download Sphinx-4 beta 3
-#wget -O $SPHINXDLNAME $SPHINXDL
-#unzip $SPHINXDLNAME
 
-# See if the user has supplied a custom word list to be compiled, otherwise grab it from roila.org
-
+#TODO See if the user has supplied a custom word list to be compiled, otherwise grab it from roila.org
 #TODO Check paramaters to see if there are any files supplied
 
 
@@ -110,14 +106,23 @@ function DownloadJavaLib {
 	wget -O RoilaLib.jar https://github.com/joshhendo/RoilaLib/blob/master/compiled/RoilaLib.jar?raw=true
 }
 
+function DownloadJavaSource {
+	# Download the sample class BTsend.class
+	wget -O BTsend.class http://roila.org/wp-content/uploads/2010/04/roila_java.txt
+
+	# Download Sphinx-4 beta 3
+	wget -O $SPHINXDLNAME $SPHINXDL
+	unzip $SPHINXDLNAME
+}
+
 function InstallVoice {
 	INSTALL_LOCATION=/usr/share/festival/voices/english
 	echo "Please enter an install location, or press enter to use the default (recommended) (default: $ISNTALL_LOCATION):"
 	read NEW_INSTALL_LOCATION
 
-	#if [ $NEW_INSTALL_LOCATION != "" ]; then
-	#	INSTALL_LOCATION=$NEW_INSTALL_LOCATION
-	#fi
+	if [ $NEW_INSTALL_LOCATION != "" ]; then
+		INSTALL_LOCATION=$NEW_INSTALL_LOCATION
+	fi
 
 	# ensure that the directory exists
 	# http://stackoverflow.com/questions/59838/how-to-check-if-a-directory-exists-in-a-shell-script
@@ -134,32 +139,58 @@ function InstallVoice {
 	fi
 }
 
-#wget -O BTsend.class http://roila.org/wp-content/uploads/2010/04/roila_java.txt
+function DownloadFestivalPortable {
+	# TODO
+	echo "Not implemented"
+}
 
 
+while [ true ]
+do
+	# Print a menu
+	echo -e "Please select an option:\\n\\t1: Download pre-compiled Java Library with Sample Config (recommended)\\n\\t2: Download Java Sources with Samples\\n\\t3: Download pre-compiled Java Lib w/o sample\\n\\t4: Download Java Sources w/o sample\\n\\t5: Install Java (Portable)\\n\\t6: Install ROILA voice to Festival (admin required)\\n\\t0: Exit Script"
+	read MENUOPTION
 
-# Print a menu
-echo -e "Please select an option:\\n\\t1: Download pre-compiled Java Library with Sample Config (recommended)\\n\\t2: Download Java Sources with Samples"
-read MENUOPTION
+	if [ $MENUOPTION == "0" ]; then
+		exit 0
+	fi
 
-if [ $MENUOPTION == "1" ]; then
-	echo "Downloading pre-compiled Java Library w/ Sample Config"
-	DownloadSamples
-	DownloadJavaLib
-fi
+	if [ $MENUOPTION == "1" ]; then
+		echo "Downloading pre-compiled Java Library w/ Sample Config"
+		DownloadSamples
+		DownloadJavaLib
+	fi
 
-if [ $MENUOPTION == "2" ]; then
-	echo "Downloading Java Sources w/ Samples."
-	DownloadSamples
-fi
+	if [ $MENUOPTION == "2" ]; then
+		echo "Downloading Java Sources w/ Samples."
+		DownloadSamples
+		DownloadJavaSource
+	fi
 
-echo -e "\\n\\nDo you want to install the ROILA voice to Festival? (Y/N)"
-read VOICE_INSTALL
-RESULT=$(echo ${VOICE_INSTALL:0:1} | tr [:upper:] [:lower:])
+	if [ $MENUOPTION == "3" ]; then
+		echo "Downloading pre-compiled Java Library w/o Sample Config"
+		DownloadJavaLib
+	fi
 
-if [ $RESULT == "y" ]; then
-	echo "You have chosen to install the voice into Festival."
-	InstallVoice
-fi
+	if [ $MENUOPTION == "4" ]; then
+		echo "Downloading Java Sources w/o Samples."
+		DownloadJavaSource
+	fi
 
-exit 0
+	if [ $MENUOPTION == "5" ]; then
+		echo "Downloading a portable version of the Java JDK."
+		DownloadJava
+	fi
+
+	if [ $MENUIOTION == "6" ]; then
+		#echo -e "\\n\\nDo you want to install the ROILA voice to Festival? (Y/N)"
+		#read VOICE_INSTALL
+		#RESULT=$(echo ${VOICE_INSTALL:0:1} | tr [:upper:] [:lower:])
+
+		echo "You have chosen to install the voice into Festival."
+		InstallVoice
+
+	fi
+
+done
+
