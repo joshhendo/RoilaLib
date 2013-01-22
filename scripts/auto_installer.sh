@@ -85,14 +85,14 @@ function DownloadSamples {
 		read LMFILE
 	else
 		# Download the default .6d and lm file
-		wget http://dl.dropbox.com/u/4654434/9990.lm
-		wget http://dl.dropbox.com/u/4654434/newdict2.6d
+		wget https://raw.github.com/joshhendo/RoilaLib/master/files/9990.lm
+		wget https://raw.github.com/joshhendo/RoilaLib/master/files/newdict2.6d
 
 		SIXDFILE=`pwd`/newdict2.6d
 		LMFILE=`pwd`/9990.lm
 	fi
 
-	wget http://dl.dropbox.com/u/4654434/roila.config.xml
+	wget https://raw.github.com/joshhendo/RoilaLib/master/files/roila.config.xml
 
 	# Escape the file properly. see http://stackoverflow.com/questions/471183/linux-command-line-global-search-and-replace
 	LMFILE=`echo $LMFILE | sed -e 's/[\/&]/\\\\&/g'`
@@ -124,18 +124,20 @@ function InstallVoice {
 		INSTALL_LOCATION=$NEW_INSTALL_LOCATION
 	fi
 
+	#Download the voice
+	# http://stackoverflow.com/questions/5207974/writing-a-bash-script-that-performs-operations-that-require-root-permissions
+	wget -O roila_diphone.tar.gz https://github.com/joshhendo/RoilaLib/blob/master/files/voice/roila_diphone.tar.gz?raw=true
+	CURRENT_PATH=`pwd`/roila_diphone
+	echo $CURRENT_PATH
+	tar -zxvf roila_diphone.tar.gz
+
 	# ensure that the directory exists
 	# http://stackoverflow.com/questions/59838/how-to-check-if-a-directory-exists-in-a-shell-script
 	if [ -d "$INSTALL_LOCATION" ]; then
-		# http://stackoverflow.com/questions/5207974/writing-a-bash-script-that-performs-operations-that-require-root-permissions
-		wget -O roila_diphone.tar.gz https://github.com/joshhendo/RoilaLib/blob/master/files/voice/roila_diphone.tar.gz?raw=true
-		CURRENT_PATH=`pwd`/roila_diphone
-		echo $CURRENT_PATH
-		tar -zxvf roila_diphone.tar.gz
-		
 		sudo cp -R $CURRENT_PATH $INSTALL_LOCATION
 	else
-		echo "$INSTALL_LOCATION doesn't exist. Can't install voice until this location exists. Please ensure Festival is installed."
+		echo "$INSTALL_LOCATION doesn't exist. Can't install voice until this location exists."
+		echo "The voice has been downloaded and extracted locally without been installed."
 	fi
 }
 
@@ -193,4 +195,3 @@ do
 	fi
 
 done
-
