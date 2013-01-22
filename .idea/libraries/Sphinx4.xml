@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Sphinx4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/sphinx4/batch.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/sphinx4/js.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/sphinx4/junit-4.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/sphinx4/RM1_8gau_13dCep_16k_40mel_130Hz_6800Hz.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/sphinx4/sphinx4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/sphinx4/tags.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/sphinx4/TIDIGITS_8gau_13dCep_16k_40mel_130Hz_6800Hz.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/sphinx4/WSJ_8gau_13dCep_16k_40mel_130Hz_6800Hz.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/sphinx4/WSJ_8gau_13dCep_8kHz_31mel_200Hz_3500Hz.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
