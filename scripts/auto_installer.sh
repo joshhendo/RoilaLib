@@ -150,7 +150,7 @@ function DownloadFestivalPortable {
 while [ true ]
 do
 	# Print a menu
-	echo -e "Please select an option:\\n\\t1: Download pre-compiled Java Library with Sample Config (recommended)\\n\\t2: Download Java Sources with Samples\\n\\t3: Download pre-compiled Java Lib w/o sample\\n\\t4: Download Java Sources w/o sample\\n\\t5: Install Java (Portable)\\n\\t6: Install ROILA voice to Festival (admin required)\\n\\t0: Exit Script"
+	echo -e "Please select an option:\\n\\t1: Download pre-compiled Java Library\\n\\t2: Download Java Sources\\n\\t3: Downlod Sample Config\\n\\t4: Not Implemented\\n\\t5: Install Java (Portable)\\n\\t6: Install ROILA voice to Festival (admin required)\\n\\t0: Exit Script"
 	read MENUOPTION
 
 	if [ $MENUOPTION == "0" ]; then
@@ -158,25 +158,22 @@ do
 	fi
 
 	if [ $MENUOPTION == "1" ]; then
-		echo "Downloading pre-compiled Java Library w/ Sample Config"
-		DownloadSamples
+		echo "Downloading pre-compiled Java Library "
 		DownloadJavaLib
 	fi
 
 	if [ $MENUOPTION == "2" ]; then
-		echo "Downloading Java Sources w/ Samples."
-		DownloadSamples
+		echo "Downloading Java Sources"
 		DownloadJavaSource
 	fi
 
 	if [ $MENUOPTION == "3" ]; then
-		echo "Downloading pre-compiled Java Library w/o Sample Config"
-		DownloadJavaLib
+		echo "Downloading Samples"
+		DownloadSamples
 	fi
 
 	if [ $MENUOPTION == "4" ]; then
-		echo "Downloading Java Sources w/o Samples."
-		DownloadJavaSource
+		echo "Not implemented"
 	fi
 
 	if [ $MENUOPTION == "5" ]; then
