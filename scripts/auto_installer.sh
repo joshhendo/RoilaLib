@@ -158,11 +158,15 @@ function InstallVoice {
 	fi
 
 	if [ $FEMALE == true ]
-		wget http://festvox.org/packed/festival/latest/festvox_cmu_us_slt_arctic_hts.tar.gz
-		tar xvf festvox_cmu_us_slt_arctic_hts.tar.gz
+		wget -O roila_female.tar.gz https://github.com/joshhendo/RoilaLib/blob/master/files/voice/roila_female.tar.gz?raw=true
+		CURRENT_PATH=`pwd`/roila_female
+		echo $CURRENT_PATH
+		tar -zxvf roila_female.tar.gz
 
+		# ensure that the directory exists
+		# http://stackoverflow.com/questions/59838/how-to-check-if-a-directory-exists-in-a-shell-script
 		if [ -d "$INSTALL_LOCATION" ]; then
-			sudo cp festival/lib/voices/us/cmu_us_slt_arctic_hts $INSTALL_LOCATION
+			sudo cp -R $CURRENT_PATH $INSTALL_LOCATION
 		else
 			echo "$INSTALL_LOCATION doesn't exist. Can't install voice until this location exists."
 			echo "The voice has been downloaded and extracted locally without been installed."
