@@ -124,20 +124,49 @@ function InstallVoice {
 		INSTALL_LOCATION=$NEW_INSTALL_LOCATION
 	fi
 
-	#Download the voice
-	# http://stackoverflow.com/questions/5207974/writing-a-bash-script-that-performs-operations-that-require-root-permissions
-	wget -O roila_diphone.tar.gz https://github.com/joshhendo/RoilaLib/blob/master/files/voice/roila_diphone.tar.gz?raw=true
-	CURRENT_PATH=`pwd`/roila_diphone
-	echo $CURRENT_PATH
-	tar -zxvf roila_diphone.tar.gz
+	MALE=false
+	FEMALE=false
 
-	# ensure that the directory exists
-	# http://stackoverflow.com/questions/59838/how-to-check-if-a-directory-exists-in-a-shell-script
-	if [ -d "$INSTALL_LOCATION" ]; then
-		sudo cp -R $CURRENT_PATH $INSTALL_LOCATION
-	else
-		echo "$INSTALL_LOCATION doesn't exist. Can't install voice until this location exists."
-		echo "The voice has been downloaded and extracted locally without been installed."
+	if   [ $1 == '1' ]; then
+		MALE=true
+		echo "Installing Male Voice"
+	elif [ $1 == '2' ]; then
+		FEMALE=true
+		echo "Installing Female Voice"
+	elif [ $1 == '3' ]; then
+		MALE=true
+		FEMALE=true
+		echo "Installing Male and Female Voice"
+	fi
+
+	if [ $MALE == true ]
+		#Download the voice
+		# http://stackoverflow.com/questions/5207974/writing-a-bash-script-that-performs-operations-that-require-root-permissions
+		wget -O roila_diphone.tar.gz https://github.com/joshhendo/RoilaLib/blob/master/files/voice/roila_diphone.tar.gz?raw=true
+		CURRENT_PATH=`pwd`/roila_diphone
+		echo $CURRENT_PATH
+		tar -zxvf roila_diphone.tar.gz
+
+		# ensure that the directory exists
+		# http://stackoverflow.com/questions/59838/how-to-check-if-a-directory-exists-in-a-shell-script
+		if [ -d "$INSTALL_LOCATION" ]; then
+			sudo cp -R $CURRENT_PATH $INSTALL_LOCATION
+		else
+			echo "$INSTALL_LOCATION doesn't exist. Can't install voice until this location exists."
+			echo "The voice has been downloaded and extracted locally without been installed."
+		fi
+	fi
+
+	if [ $FEMALE == true ]
+		wget http://festvox.org/packed/festival/latest/festvox_cmu_us_slt_arctic_hts.tar.gz
+		tar xvf festvox_cmu_us_slt_arctic_hts.tar.gz
+
+		if [ -d "$INSTALL_LOCATION" ]; then
+			sudo cp festival/lib/voices/us/cmu_us_slt_arctic_hts $INSTALL_LOCATION
+		else
+			echo "$INSTALL_LOCATION doesn't exist. Can't install voice until this location exists."
+			echo "The voice has been downloaded and extracted locally without been installed."
+		fi
 	fi
 }
 
@@ -181,13 +210,16 @@ do
 		DownloadJava
 	fi
 
-	if [ $MENUIOTION == "6" ]; then
+	if [ $MENUOPTION == "6" ]; then
 		#echo -e "\\n\\nDo you want to install the ROILA voice to Festival? (Y/N)"
 		#read VOICE_INSTALL
 		#RESULT=$(echo ${VOICE_INSTALL:0:1} | tr [:upper:] [:lower:])
 
 		echo "You have chosen to install the voice into Festival."
-		InstallVoice
+		echo -e "Which voice do you want?\\n\\t1: Male\\n\\t2: Female\\n\\t3: Both"
+		read VOICEOPTION
+
+		InstallVoice $VOICEOPTION
 
 	fi
 
