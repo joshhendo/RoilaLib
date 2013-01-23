@@ -29,6 +29,12 @@ public class Festival
         w.flush();
     }
 
+    public void SayAlt(String input) throws Exception
+    {
+        CheckInstall();
+        ProcessBuilder pb = new ProcessBuilder("text2wave");
+    }
+
     public void Save(String input) throws Exception
     {
         CheckInstall();
