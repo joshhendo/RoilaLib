@@ -1,8 +1,7 @@
 package org.roila;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.io.*;
+import java.util.ArrayList;
 
 public class Festival
 {
@@ -18,6 +17,47 @@ public class Festival
         }
 
         return true;
+    }
+
+    private ArrayList<String> VoiceLocations() throws Exception
+    {
+        ArrayList<String> locations = new ArrayList<String>();
+
+        try
+        {
+            ProcessBuilder pb = new ProcessBuilder("find", "/", "-path", "*festival/voices/english");
+            Process p = pb.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+            String line;
+
+            while ((line = reader.readLine()) != null)
+            {
+                if (!line.endsWith("Permission denied"))
+                {
+                    locations.add(line);
+                }
+            }
+        }
+        catch (IOException e)
+        {
+            throw new Exception("Issue running find command");
+        }
+
+        return locations;
+    }
+
+    private String CheckVoice(String name) throws Exception
+    {
+        ArrayList<String> locations = VoiceLocations();
+
+        for (String location : locations)
+        {
+            String path = location + "/" + name;
+            if (new File(path).exists()) return path;
+        }
+
+        return null;
     }
 
     public void Say(String input) throws Exception
