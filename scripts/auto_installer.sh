@@ -183,7 +183,7 @@ function DownloadFestivalPortable {
 while [ true ]
 do
 	# Print a menu
-	echo -e "Please select an option:\\n\\t1: Download pre-compiled Java Library\\n\\t2: Download Java Sources\\n\\t3: Downlod Sample Config\\n\\t4: Not Implemented\\n\\t5: Install Java (Portable)\\n\\t6: Install ROILA voice to Festival (admin required)\\n\\t0: Exit Script"
+	echo -e "Please select an option:\\n\\t1: Download pre-compiled Java Library\\n\\t2: Download Java Sources\\n\\t3: Download Sample Config\\n\\t4: Not Implemented\\n\\t5: Install Java (Portable)\\n\\t6: Install ROILA voice to Festival (admin required)\\n\\t0: Exit Script"
 	read MENUOPTION
 
 	if [ $MENUOPTION == "0" ]; then
@@ -215,15 +215,13 @@ do
 	fi
 
 	if [ $MENUOPTION == "6" ]; then
-		#echo -e "\\n\\nDo you want to install the ROILA voice to Festival? (Y/N)"
-		#read VOICE_INSTALL
-		#RESULT=$(echo ${VOICE_INSTALL:0:1} | tr [:upper:] [:lower:])
-
 		echo "You have chosen to install the voice into Festival."
-		echo -e "Which voice do you want?\\n\\t1: Male\\n\\t2: Female\\n\\t3: Both"
+		echo -e "Which voice do you want?\\n\\t1: Male\\n\\t2: Female\\n\\t3: Both\\n\\t0: Cancel"
 		read VOICEOPTION
 
-		InstallVoice $VOICEOPTION
+		if [ $VOICEOPTION != "0" ]; then
+			InstallVoice $VOICEOPTION
+		fi
 
 	fi
 
