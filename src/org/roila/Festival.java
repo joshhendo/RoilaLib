@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public class Festival
 {
+    String current_voice = null;
+
     // http://stackoverflow.com/questions/2439984/how-to-check-if-a-program-is-installed-on-system
     private Boolean CheckInstall() throws Exception {
         try
@@ -47,7 +49,7 @@ public class Festival
         return locations;
     }
 
-    private String CheckVoice(String name) throws Exception
+    public String CheckVoice(String name) throws Exception
     {
         ArrayList<String> locations = VoiceLocations();
 
@@ -60,12 +62,79 @@ public class Festival
         return null;
     }
 
+    private void SetVoice(String voice)
+    {
+        ArrayList<String> locations = null;
+
+        try
+        {
+            locations = VoiceLocations();
+        }
+        catch (Exception e)
+        {
+            return;
+        }
+
+        if (locations == null || locations.isEmpty()) return;
+
+        String location = locations.get(0);
+
+        String female = "roila_female";
+        String male = "roila_diphone";
+
+        String check = null;
+
+        if (voice == female)
+        {
+            check = female;
+        }
+        else if (voice == male)
+        {
+            check = male;
+        }
+        else
+        {
+            return;
+        }
+
+        File file = new File(location + "/" + check);
+
+        if (file.exists())
+        {
+            current_voice = check;
+        }
+
+        return;
+    }
+
+    public void SetMale()
+    {
+        SetVoice("roila_diphone");
+    }
+
+    public void SetFemale()
+    {
+        SetVoice("roila_female");
+    }
+
+    public void ClearVoice()
+    {
+        current_voice = null;
+    }
+
     public void Say(String input) throws Exception
     {
         CheckInstall();
         Process p = Runtime.getRuntime().exec("festival");
         Writer w = new OutputStreamWriter(p.getOutputStream());
+        if (current_voice != null)
+        {
+            w.append("(voice_" + current_voice + ")");
+            System.out.println("(voice_" + current_voice + ")");
+            //w.flush();
+        }
         w.append("(SayText \"" + input + "\")");
+        System.out.println("(SayText \"" + input + "\")");
         w.flush();
     }
 
