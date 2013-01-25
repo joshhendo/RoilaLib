@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="RoilaLib">
+    <output-path>$PROJECT_DIR$/out/artifacts/RoilaLib</output-path>
+    <root id="archive" name="RoilaLib.jar">
+      <element id="library" level="project" name="Sphinx4" />
+      <element id="module-output" name="RoilaLib" />
+    </root>
+  </artifact>
+</component>
