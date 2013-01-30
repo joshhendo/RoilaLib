@@ -12,38 +12,73 @@ public class Sphinx
     private Listen listener;
     private String CONFIG_LOCATION = "roila.config.xml";
 
+    /**
+     * Default constructor. Uses default configuration location of "roila.config.xml" in the current directory.
+     */
     public Sphinx()
     {
         listener = new Listen(CONFIG_LOCATION);
     }
 
+    /**
+     * Constructor allowing you to specify a location for "roila.config.xml" as either a relative or absolute path.
+     * @param location Specify the location of roila.config.xml as a relative or absolute path. Absolute path is not recommended in most situations.
+     */
     public Sphinx(String location)
     {
         CONFIG_LOCATION = location;
         listener = new Listen(CONFIG_LOCATION);
     }
 
-
+    /**
+     * Allows you to change the location of roila.config.xml after this has been constructed.
+     * @param location Specfiy the location of roila.config.xml as a relative or absolute path. Absolute path is not recommended in most situations.
+     */
     public void SetLocation(String location)
     {
         CONFIG_LOCATION = location;
     }
 
-    // This will listen until it understands a sentence with no time limit
+    /**
+     * This will listen until it understands a phrase or sentence. There is no timeout.
+     * @return Text recognised.
+     * @throws Exception
+     */
     public String Listen() throws Exception {
         return Listen(-1, false);
     }
 
+    /**
+     * This will listen until it understands a phrase or sentence, or until it times out.
+     * @param milliseconds Timeout in milliseconds. 1 second = 1000 milliseconds.
+     * @return
+     * @throws Exception
+     */
     public String Listen(int milliseconds) throws Exception {
         return Listen(milliseconds, false);
     }
 
+    /**
+     * Initialise the Sphinx listening library. You may want to call this manually, but if you don't it will be called automatically when needed.
+     * This is because it can take a few seconds to do so, and this gives you greater control over Sphinx (e.g. don't prompt to start speaking
+     * until after initialisation.)
+     * @return true if successful, otherwise false.
+     * @throws Exception
+     */
     public Boolean init() throws Exception
     {
         return listener.init();
     }
 
     // This will listen until it understands a sentence or until the timer runs out.
+
+    /**
+     * This will listen until it understands a phrase or sentence, or until it times out. Also allows you to output debug information.
+     * @param milliseconds Timeout in milliseconds. 1 second = 1000 milliseconds.
+     * @param debug Will output debug info to stdout. Not recommended for final product. Suggest having a constant called DEBUG that you can change to false.
+     * @return
+     * @throws Exception
+     */
     public String Listen(int milliseconds, Boolean debug) throws Exception
     {
         ExecutorService executor = Executors.newSingleThreadExecutor();

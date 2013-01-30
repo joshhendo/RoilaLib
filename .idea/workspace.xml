@@ -7,7 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="137435ba-0558-4104-83c0-f0c22a5370ea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/roila/Festival.java" afterPath="$PROJECT_DIR$/src/org/roila/Festival.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/roila/Sphinx.java" afterPath="$PROJECT_DIR$/src/org/roila/Sphinx.java" />
     </list>
     <ignored path="RoilaLib.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,6 +31,7 @@
     <groupTables value="false" />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" />
     <breakpoint_any default_suspend_policy="SuspendAll">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -62,7 +64,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -72,19 +73,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Sphinx.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Sphinx.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/roila/Sphinx.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="0" selection-start="559" selection-end="559" vertical-scroll-proportion="0.0">
+            <state line="79" column="24" selection-start="2925" selection-end="2925" vertical-scroll-proportion="-0.418637">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Festival.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Festival.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/roila/Festival.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="170" column="75" selection-start="4605" selection-end="4606" vertical-scroll-proportion="2.2540984">
+            <state line="150" column="9" selection-start="4106" selection-end="4106" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1037#1045#0" expanded="true" />
@@ -107,6 +108,7 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/src/org/roila/Festival.java" />
+        <option value="$PROJECT_DIR$/src/org/roila/Sphinx.java" />
       </list>
     </option>
   </component>
@@ -144,30 +146,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RoilaLib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RoilaLib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -228,6 +206,30 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RoilaLib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RoilaLib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -244,8 +246,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -492,18 +494,20 @@
         <state line="27" column="5" selection-start="611" selection-end="611" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/roila/Sphinx.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="559" selection-end="559" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/roila/Festival.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="170" column="75" selection-start="4605" selection-end="4606" vertical-scroll-proportion="2.2540984">
+        <state line="150" column="9" selection-start="4106" selection-end="4106" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1037#1045#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/roila/Sphinx.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="24" selection-start="2925" selection-end="2925" vertical-scroll-proportion="-0.418637">
+          <folding />
         </state>
       </provider>
     </entry>
