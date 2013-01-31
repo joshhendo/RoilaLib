@@ -139,7 +139,7 @@ function InstallVoice {
 		echo "Installing Male and Female Voice"
 	fi
 
-	if [ $MALE == true ]
+	if [ $MALE == true ]; then
 		#Download the voice
 		# http://stackoverflow.com/questions/5207974/writing-a-bash-script-that-performs-operations-that-require-root-permissions
 		wget -O roila_diphone.tar.gz https://github.com/joshhendo/RoilaLib/blob/master/files/voice/roila_diphone.tar.gz?raw=true
@@ -157,7 +157,7 @@ function InstallVoice {
 		fi
 	fi
 
-	if [ $FEMALE == true ]
+	if [ $FEMALE == true ]; then
 		wget -O roila_female.tar.gz https://github.com/joshhendo/RoilaLib/blob/master/files/voice/roila_female.tar.gz?raw=true
 		CURRENT_PATH=`pwd`/roila_female
 		echo $CURRENT_PATH
